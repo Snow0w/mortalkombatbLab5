@@ -93,14 +93,7 @@ public class CharacterAction {
     ImageIcon icon1 = null;
     icon1 = new ImageIcon("src/main/resources/kao.jpeg");
     label2.setText("Shao Kahn (босс)");
-    switch (i) {
-    case 0:
-      enemyy = enemyes[4];
-      break;
-    case 1:
-      enemyy = enemyes[5];
-      break;
-    }
+    enemyy = enemyes[4];
     label.setIcon(icon1);
     text.setText(Integer.toString(enemyy.getDamage()));
     label3.setText(Integer.toString(enemyy.getHealth()) + "/" +
@@ -185,7 +178,7 @@ public class CharacterAction {
         human.setLevel();
         human.setNextExperience(experience_for_next_level[i + 1]);
         NewHealthHuman(human);
-        for (int j = 0; j < 4; j++) {
+        for (int j = 0; j < 5; j++) {
           NewHealthEnemy(enemyes[j], human);
         }
       }
@@ -208,7 +201,7 @@ public class CharacterAction {
         human.setLevel();
         human.setNextExperience(experience_for_next_level[i + 1]);
         NewHealthHuman(human);
-        for (int j = 0; j < 4; j++) {
+        for (int j = 0; j < 5; j++) {
           NewHealthEnemy(enemyes[j], human);
         }
       }

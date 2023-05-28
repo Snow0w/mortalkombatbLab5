@@ -115,7 +115,12 @@ public class Fight {
     if (i % 2 == 1) {
       Move(human, enemy, label7, label8);
     } else {
-      Move(enemy, human, label7, label8);
+      if (enemy instanceof ShaoKahn) {
+        Boolean ret = hillShaKahn(enemy, human, label7, label8);
+        if (ret)
+          Move(enemy, human, label7, label8);
+      } else
+        Move(enemy, human, label7, label8);
     }
     i++;
     change.RoundTexts(human, enemy, label, label2, i, label6);
@@ -138,6 +143,21 @@ public class Fight {
         EndRound(human, enemy, dialog, label3, action, items);
       }
     }
+  }
+
+  private Boolean hillShaKahn(Player enemy, Player human, JLabel label7,
+                              JLabel label8) {
+
+    double v = Math.random();
+    if (v < 0.5)
+      return true;
+    if (human.getAttack() == 1) {
+      label8.setText(human.getName() + " double attacked!");
+      enemy.setHealth(-(int)human.getDamage() * 2);
+    } else
+      label8.setText(enemy.getName() + " healed!");
+    enemy.setHealth((int)((enemy.getMaxHealth() - enemy.getHealth()) * 0.5));
+    return false;
   }
 
   public void EndRound(Player human, Player enemy, JDialog dialog, JLabel label,
