@@ -14,6 +14,7 @@ import edu.mephi.enemys.SubZero;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 
 /**
@@ -93,10 +94,10 @@ public class CharacterAction {
     icon1 = new ImageIcon("src/main/resources/kao.jpeg");
     label2.setText("Shao Kahn (босс)");
     switch (i) {
-    case 2:
+    case 0:
       enemyy = enemyes[4];
       break;
-    case 4:
+    case 1:
       enemyy = enemyes[5];
       break;
     }
@@ -154,7 +155,7 @@ public class CharacterAction {
     }
   }
 
-  public void AddPoints(Human human, Player[] enemyes) {
+  public void AddPoints(Human human, Player[] enemyes, boolean fin) {
     switch (human.getLevel()) {
     case 0:
       human.setExperience(20);
@@ -177,6 +178,8 @@ public class CharacterAction {
       human.setPoints(55 + human.getHealth() / 4);
       break;
     }
+    if (fin)
+      return;
     for (int i = 0; i < 5; i++) {
       if (experience_for_next_level[i] == human.getExperience()) {
         human.setLevel();
@@ -246,8 +249,19 @@ public class CharacterAction {
       damage = 6;
       break;
     }
-    human.setMaxHealth(hp);
-    human.setDamage(damage);
+    String[] options = {"Здоровье", "Атака"};
+    int ret = JOptionPane.showOptionDialog(
+        null, "Что улучшить?", "New level", JOptionPane.DEFAULT_OPTION,
+        JOptionPane.DEFAULT_OPTION, null, options, null);
+    while (ret == JOptionPane.CLOSED_OPTION) {
+      ret = JOptionPane.showOptionDialog(
+          null, "Что улучшить?", "New level", JOptionPane.DEFAULT_OPTION,
+          JOptionPane.DEFAULT_OPTION, null, options, null);
+    }
+    if (ret == 0)
+      human.setMaxHealth(hp);
+    else
+      human.setDamage(damage);
   }
 
   public void NewHealthEnemy(Player enemy, Human human) {

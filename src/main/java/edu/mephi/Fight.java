@@ -9,6 +9,7 @@ package edu.mephi;
 // ADD IMAGE!!!
 import edu.mephi.enemys.ShaoKahn;
 import java.util.ArrayList;
+import java.util.Random;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,6 +22,25 @@ import javax.swing.JRadioButton;
  */
 public class Fight {
 
+  public int getEnemy_num() { return enemy_num; }
+
+  public void setEnemy_num(int enemy_num) { this.enemy_num = enemy_num; }
+
+  private int enemy_num = 1;
+  private int location_num = 1;
+  private int current_location = 1;
+
+  public int getCurrent_location() { return current_location; }
+
+  public void setCurrent_location(int current_location) {
+    this.current_location = current_location;
+  }
+
+  public int getLocation_num() { return location_num; }
+
+  public void setLocation_num(int location_num) {
+    this.location_num = location_num;
+  }
   ChangeTexts change = new ChangeTexts();
   int kind_attack[] = {0};
   int experiences[] = {40, 90, 180, 260, 410};
@@ -110,7 +130,8 @@ public class Fight {
       label7.setText("Вы воскресли");
     }
     if (human.getHealth() <= 0 | enemy.getHealth() <= 0) {
-      if (((Human)human).getWin() == 11) {
+      enemy_num--;
+      if (enemy_num == -1 && location_num == current_location) {
         EndFinalRound(((Human)human), action, results, dialog1, dialog2, frame,
                       label4, label5);
       } else {
@@ -133,7 +154,7 @@ public class Fight {
         action.AddPointsBoss(((Human)human), action.getEnemyes());
       } else {
         action.AddItems(25, 15, 5, items);
-        action.AddPoints(((Human)human), action.getEnemyes());
+        action.AddPoints(((Human)human), action.getEnemyes(), false);
       }
     } else {
       label.setText(enemy.getName() + " win");
@@ -151,7 +172,7 @@ public class Fight {
     String text = "Победа не на вашей стороне";
     if (human.getHealth() > 0) {
       human.setWin();
-      action.AddPoints(human, action.getEnemyes());
+      action.AddPoints(human, action.getEnemyes(), true);
       text = "Победа на вашей стороне";
     }
     boolean top = false;
@@ -190,10 +211,16 @@ public class Fight {
                          JLabel label3, CharacterAction action) {
 
     Player enemy1 = null;
-    if (((Human)human).getWin() == 6 | ((Human)human).getWin() == 11) {
+    if (enemy_num == 0) {
       enemy1 = action.ChooseBoss(label, label2, text, label3, human.getLevel());
     } else {
       enemy1 = action.ChooseEnemy(label, label2, text, label3);
+      if (enemy_num == -1) {
+        current_location++;
+        Random rand = new Random();
+        enemy_num = rand.nextInt(2) + human.getLevel() + 1;
+        enemy1 = action.ChooseEnemy(label, label2, text, label3);
+      }
     }
     pr1.setMaximum(human.getMaxHealth());
     pr2.setMaximum(enemy1.getMaxHealth());

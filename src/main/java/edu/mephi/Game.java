@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Random;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.JTable;
@@ -29,10 +30,14 @@ public class Game {
   CharacterAction action = new CharacterAction();
   ChangeTexts change = new ChangeTexts();
   Fight fight = new Fight();
+
   private ArrayList<Result> results = new ArrayList<>();
 
   public Player NewEnemy(JLabel L1, JLabel L2, JLabel L3, JLabel L4,
                          JProgressBar pr2) {
+    Random rand = new Random();
+    fight.setEnemy_num(rand.nextInt(2) + 1);
+    System.out.println(fight.getEnemy_num());
     action.setEnemyes();
     Player enemy = action.ChooseEnemy(L1, L2, L3, L4);
     action.HP(enemy, pr2);
@@ -88,6 +93,7 @@ public class Game {
           new Result(sh.getRow(i).getCell(1).getStringCellValue(),
                      (int)sh.getRow(i).getCell(2).getNumericCellValue()));
     }
+    book.close();
   }
 
   public void WriteToTable(JTable table) {

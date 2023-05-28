@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -1628,9 +1629,22 @@ public class JFrames extends javax.swing.JFrame {
   private void
   StartGameActionPerformed(java.awt.event.ActionEvent
                                evt) { // GEN-FIRST:event_jButton1ActionPerformed
+
+    String[] options = {"1", "2", "3", "4"};
+    int ret = JOptionPane.showOptionDialog(
+        this, "Выберите количество локаций", "Start game",
+        JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options,
+        null);
+    while (ret == JOptionPane.CLOSED_OPTION) {
+      ret = JOptionPane.showOptionDialog(
+          this, "Выберите количество локаций", "Start game",
+          JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options,
+          null);
+    }
+    game.fight.setLocation_num(ret + 1);
+
     jFrame1.setVisible(rootPaneCheckingEnabled);
     jFrame1.setSize(1000, 700);
-
     human = game.NewHuman(jProgressBar1);
 
     enemy = game.NewEnemy(jLabel4, jLabel5, jLabel10, jLabel13, jProgressBar2);
