@@ -22,13 +22,22 @@ import javax.swing.JRadioButton;
  */
 public class Fight {
 
-  public int getEnemy_num() { return enemy_num; }
-
-  public void setEnemy_num(int enemy_num) { this.enemy_num = enemy_num; }
-
   private int enemy_num = 1;
   private int location_num = 1;
   private int current_location = 1;
+
+  ChangeTexts change = new ChangeTexts();
+  int kind_attack[] = {0};
+  int experiences[] = {40, 90, 180, 260, 410};
+  EnemyFabric fabric = new EnemyFabric();
+  int i = 1;
+  int k = -1;
+  int stun = 0;
+  double v = 0.0;
+
+  public int getEnemy_num() { return enemy_num; }
+
+  public void setEnemy_num(int enemy_num) { this.enemy_num = enemy_num; }
 
   public int getCurrent_location() { return current_location; }
 
@@ -41,14 +50,6 @@ public class Fight {
   public void setLocation_num(int location_num) {
     this.location_num = location_num;
   }
-  ChangeTexts change = new ChangeTexts();
-  int kind_attack[] = {0};
-  int experiences[] = {40, 90, 180, 260, 410};
-  EnemyFabric fabric = new EnemyFabric();
-  int i = 1;
-  int k = -1;
-  int stun = 0;
-  double v = 0.0;
 
   public void Move(Player p1, Player p2, JLabel l, JLabel l2) {
     if (stun == 1) {
@@ -116,7 +117,7 @@ public class Fight {
       Move(human, enemy, label7, label8);
     } else {
       if (enemy instanceof ShaoKahn) {
-        Boolean ret = hillShaKahn(enemy, human, label7, label8);
+        Boolean ret = healShaKahn(enemy, human, label7, label8);
         if (ret)
           Move(enemy, human, label7, label8);
       } else
@@ -145,7 +146,7 @@ public class Fight {
     }
   }
 
-  private Boolean hillShaKahn(Player enemy, Player human, JLabel label7,
+  private Boolean healShaKahn(Player enemy, Player human, JLabel label7,
                               JLabel label8) {
 
     double v = Math.random();
