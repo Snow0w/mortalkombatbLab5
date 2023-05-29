@@ -130,7 +130,8 @@ public class JFrames extends javax.swing.JFrame {
 
     jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-    ImageIcon varIcon = new ImageIcon("src/main/resources/kitana1.png");
+    ImageIcon varIcon =
+        new ImageIcon(getClass().getClassLoader().getResource("kitana1.png"));
     // varIcon = new ImageIcon(varIcon.getImage().getScaledInstance(
     //     100, 200, java.awt.Image.SCALE_SMOOTH));
     jLabel2.setIcon(varIcon);
@@ -1530,8 +1531,8 @@ public class JFrames extends javax.swing.JFrame {
     // InputStream baraka = res.openStream()
     // BufferedImage image =
     //     ImageIO.read(classLoader.getResource("/resources/baraka.jpeg"));
-    jLabel3.setIcon(
-        new javax.swing.ImageIcon("src/main/resources/mk.jpg")); // NOI18N
+    jLabel3.setIcon(new javax.swing.ImageIcon(
+        getClass().getClassLoader().getResource("mk.jpg"))); // NOI18N
 
     // jLabel3.setIcon(new javax.swing.ImageIcon(
     //     "C:\\Users\\Мария\\Desktop\\MK.jpg")); // NOI18N

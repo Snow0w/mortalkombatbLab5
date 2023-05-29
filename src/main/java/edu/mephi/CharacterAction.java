@@ -54,28 +54,32 @@ public class CharacterAction {
     switch (i) {
     case 0:
       enemyy = enemyes[0];
-      icon1 = new ImageIcon("src/main/resources/baraka.jpeg");
+      icon1 =
+          new ImageIcon(getClass().getClassLoader().getResource("baraka.jpeg"));
 
       label2.setText("Baraka (танк)");
       break;
     case 1:
       enemyy = enemyes[1];
       // icon1 = new ImageIcon("src/main/resources/subzero.png");
-      icon1 = new ImageIcon("src/main/resources/subzero.png");
+      icon1 =
+          new ImageIcon(getClass().getClassLoader().getResource("subzero.png"));
       icon1 = new ImageIcon(icon1.getImage().getScaledInstance(
           160, 290, java.awt.Image.SCALE_SMOOTH));
       label2.setText("Sub-Zero (маг)");
       break;
     case 2:
       enemyy = enemyes[2];
-      icon1 = new ImageIcon("src/main/resources/liukang.jpg");
+      icon1 =
+          new ImageIcon(getClass().getClassLoader().getResource("liukang.jpg"));
       icon1 = new ImageIcon(icon1.getImage().getScaledInstance(
           160, 290, java.awt.Image.SCALE_SMOOTH));
       label2.setText("Liu Kang (боец)");
       break;
     case 3:
       enemyy = enemyes[3];
-      icon1 = new ImageIcon("src/main/resources/sonyablade.png");
+      icon1 = new ImageIcon(
+          getClass().getClassLoader().getResource("sonyablade.png"));
       icon1 = new ImageIcon(icon1.getImage().getScaledInstance(
           160, 290, java.awt.Image.SCALE_SMOOTH));
       label2.setText("Sonya Blade (солдат)");
@@ -91,7 +95,7 @@ public class CharacterAction {
   public Player ChooseBoss(JLabel label, JLabel label2, JLabel text,
                            JLabel label3, int i) {
     ImageIcon icon1 = null;
-    icon1 = new ImageIcon("src/main/resources/kao.jpeg");
+    icon1 = new ImageIcon(getClass().getClassLoader().getResource("kao.jpeg"));
     label2.setText("Shao Kahn (босс)");
     enemyy = enemyes[4];
     label.setIcon(icon1);

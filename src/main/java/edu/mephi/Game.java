@@ -7,8 +7,10 @@
 package edu.mephi;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
@@ -76,7 +78,7 @@ public class Game {
       }
     }
     // File f = new File("~/Desktop/Results.xlsx");
-    File f = new File("src/main/resources/Results.xlsx"); // TODO
+    File f = new File("Results.xlsx"); // TODO
     book.write(new FileOutputStream(f));
     book.close();
   }
@@ -84,9 +86,11 @@ public class Game {
   public ArrayList<Result> getResults() { return this.results; }
 
   public void ReadFromExcel() throws IOException {
-    // XSSFWorkbook book = new XSSFWorkbook("~/Desktop/Results.xlsx");
-    XSSFWorkbook book =
-        new XSSFWorkbook("src/main/resources/Results.xlsx"); // TODO
+    XSSFWorkbook book = new XSSFWorkbook("Results.xlsx"); // TODO
+    // XSSFWorkbook book = new XSSFWorkbook(url.openStream()); // TODO
+    // XSSFWorkbook book =
+    //     new XSSFWorkbook(getClass().getClassLoader().getResourceAsStream(
+    // "Results.xlsx")); // TODO
     XSSFSheet sh = book.getSheetAt(0);
     for (int i = 1; i <= sh.getLastRowNum(); i++) {
       results.add(
